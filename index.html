@@ -1,0 +1,462 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PedestrianQA — A Benchmark for Vision-Language Models on Pedestrian Intention and Trajectory Prediction</title>
+  <meta name="description" content="PedestrianQA is a large-scale video question-answering benchmark for pedestrian intention and trajectory prediction with structured natural-language rationales.">
+  <meta property="og:title" content="PedestrianQA">
+  <meta property="og:description" content="A Benchmark for Vision-Language Models on Pedestrian Intention and Trajectory Prediction.">
+  <meta property="og:image" content="assets/teaser.png">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <header class="navbar">
+    <div class="nav-inner">
+      <a class="nav-brand" href="#top">
+        <span class="dot"></span>PedestrianQA
+      </a>
+      <nav>
+        <a href="#abstract">Abstract</a>
+        <a href="#dataset">Dataset</a>
+        <a href="#method">Method</a>
+        <a href="#results">Results</a>
+        <a href="#bibtex">BibTeX</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-bg" aria-hidden="true">
+        <div class="blob blob-a"></div>
+        <div class="blob blob-b"></div>
+        <div class="grid-overlay"></div>
+      </div>
+
+      <div class="hero-content">
+        <div class="venue-badge">
+          <span class="pulse"></span> ICRA 2026
+        </div>
+
+        <h1 class="title">
+          <span class="title-line">Pedestrian<span class="title-accent">QA</span></span>
+        </h1>
+
+        <p class="tagline">
+          A Benchmark for <span class="hl">Vision-Language Models</span> on Pedestrian Intention and Trajectory Prediction
+        </p>
+
+        <div class="authors">
+          <a href="#" class="author">Naman Mishra</a>
+          <a href="#" class="author">Shankar Gangisetty</a>
+          <a href="#" class="author">C. V. Jawahar</a>
+        </div>
+
+        <div class="affiliation">
+          <span>CVIT, IIIT Hyderabad</span>
+        </div>
+
+        <div class="cta-row">
+          <a href="assets/pedestrianqa_camera_ready.pdf" class="btn btn-primary">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            Paper
+          </a>
+          <a href="https://arxiv.org/" class="btn">
+            <span class="btn-tag">arXiv</span>
+          </a>
+          <a href="https://github.com/botmahn/PedestrianQA" class="btn">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.56v-2.16c-3.2.69-3.87-1.36-3.87-1.36-.53-1.34-1.29-1.7-1.29-1.7-1.06-.72.08-.71.08-.71 1.17.08 1.79 1.2 1.79 1.2 1.04 1.79 2.74 1.28 3.41.98.11-.76.41-1.28.74-1.57-2.55-.29-5.24-1.27-5.24-5.66 0-1.25.45-2.27 1.18-3.07-.12-.29-.51-1.45.11-3.03 0 0 .97-.31 3.18 1.17a11.06 11.06 0 0 1 5.78 0c2.21-1.48 3.18-1.17 3.18-1.17.63 1.58.23 2.74.11 3.03.74.8 1.18 1.82 1.18 3.07 0 4.4-2.69 5.36-5.25 5.65.42.36.79 1.07.79 2.17v3.22c0 .31.21.67.8.55C20.21 21.38 23.5 17.08 23.5 12 23.5 5.65 18.35.5 12 .5z"/></svg>
+            Code
+          </a>
+          <a href="https://huggingface.co/collections/namansmishaps/pedestrianqa" class="btn">
+            <span>🤗</span> Models
+          </a>
+          <a href="#bibtex" class="btn">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+            BibTeX
+          </a>
+        </div>
+      </div>
+
+      <!-- Teaser figure -->
+      <figure class="hero-figure">
+        <img src="assets/teaser.png" alt="Illustration of an unstructured traffic scenario where a pedestrian crosses in front of the ego vehicle. PedestrianQA predicts intention, trajectory and rationale.">
+        <figcaption>
+          <strong>Figure 1.</strong> An unstructured-traffic scenario where a pedestrian crosses in front of the ego-vehicle. Unlike prior approaches that only output a prediction, PedestrianQA predicts intention and trajectory while generating supporting rationales.
+        </figcaption>
+      </figure>
+    </section>
+
+    <!-- Abstract -->
+    <section id="abstract" class="section">
+      <div class="container narrow">
+        <p class="eyebrow">Abstract</p>
+        <h2 class="section-title">A unified, explainable framework for pedestrian behavior.</h2>
+        <p class="lead">
+          Pedestrian intention and trajectory prediction are critical for the safe deployment of autonomous driving systems, directly influencing navigation decisions in complex traffic environments. Recent advances in large vision–language models offer a powerful new paradigm for these tasks by combining high-capacity visual understanding with flexible natural-language reasoning.
+        </p>
+        <p class="lead">
+          We introduce <strong>PedestrianQA</strong>, a large-scale video-based dataset that formulates pedestrian intention and trajectory prediction as question–answering tasks augmented with structured rationales. PedestrianQA expresses richly annotated pedestrian sequences in natural language, enabling VLMs to learn from visual dynamics, contextual cues, and interactions among traffic agents while generating concise explanations of their predictions — without needing specialized architectures tailored for each task.
+        </p>
+        <p class="lead">
+          Empirical evaluations across <strong>PIE</strong>, <strong>JAAD</strong>, <strong>TITAN</strong>, and <strong>IDD-PeD</strong> show that finetuning state-of-the-art VLMs on PedestrianQA significantly improves intention classification, trajectory forecasting, and the quality of explanatory rationales — demonstrating the strong potential of VLMs as a unified, explainable framework for safety-critical pedestrian behavior modeling.
+        </p>
+      </div>
+    </section>
+
+    <!-- Highlights / Stats -->
+    <section class="section section-tint">
+      <div class="container">
+        <p class="eyebrow center">At a glance</p>
+        <h2 class="section-title center">What makes PedestrianQA different.</h2>
+
+        <div class="stat-grid">
+          <div class="stat-card">
+            <div class="stat-num">14,310</div>
+            <div class="stat-lbl">Question–answer–rationale samples</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">4</div>
+            <div class="stat-lbl">Source datasets, structured + unstructured</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">5+2</div>
+            <div class="stat-lbl">Rationale categories &amp; conclusions</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">3B</div>
+            <div class="stat-lbl">Param model surpasses 7–9B baselines</div>
+          </div>
+        </div>
+
+        <div class="feature-grid">
+          <article class="feature">
+            <div class="feature-icon i-blue">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            </div>
+            <h3>Intention Prediction</h3>
+            <p>Binary classification of whether a target pedestrian will cross the road, justified with multi-aspect reasoning rather than a black-box label.</p>
+          </article>
+
+          <article class="feature">
+            <div class="feature-icon i-red">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 17 9 11 13 15 21 7"/><polyline points="14 7 21 7 21 14"/></svg>
+            </div>
+            <h3>Trajectory Forecasting</h3>
+            <p>Future bounding-box prediction in image coordinates with paired rationales explaining the predicted spatio-temporal path.</p>
+          </article>
+
+          <article class="feature">
+            <div class="feature-icon i-green">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+            </div>
+            <h3>Structured Rationales</h3>
+            <p>Spatial, temporal, mathematical, ego-vehicle, and scene-context explanations — plus a final destination prediction and a plain-language conclusion.</p>
+          </article>
+
+          <article class="feature">
+            <div class="feature-icon i-amber">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18M3 9h18"/></svg>
+            </div>
+            <h3>Unified Benchmark</h3>
+            <p>Bridges PIE, JAAD, TITAN, and unstructured IDD-PeD into a single QA schema — enabling cross-dataset generalization and rich evaluation.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Dataset Sample -->
+    <section id="dataset" class="section">
+      <div class="container">
+        <p class="eyebrow">PedestrianQA Dataset</p>
+        <h2 class="section-title">Every sample comes with a question, an answer, and five rationales.</h2>
+        <p class="lead">
+          Each pedestrian sequence pairs a short observation video with a question, a binary or trajectory answer, and structured rationales spanning <strong>spatial</strong>, <strong>temporal</strong>, <strong>mathematical</strong>, <strong>ego-vehicle</strong>, and <strong>scene-context</strong> reasoning — followed by a final destination prediction and a concise conclusion.
+        </p>
+
+        <figure class="figure-block">
+          <img src="assets/dataset_sample.png" alt="A PedestrianQA sample showing 15 observation frames, the PIP question, the answer, and five structured rationales plus a conclusion.">
+          <figcaption>
+            <strong>Figure 2.</strong> PedestrianQA PIP sample. The model must justify its <em>Yes</em>/<em>No</em> answer using spatial, temporal, mathematical, ego-vehicle, and scene-context reasoning, with a concise conclusion suitable for non-expert users.
+          </figcaption>
+        </figure>
+
+        <div class="rationale-grid">
+          <div class="r-card"><span class="r-tag spatial">Spatial</span><p>Pose, body orientation, and physical placement (e.g., on the curb, in a lane, perpendicular to the road).</p></div>
+          <div class="r-card"><span class="r-tag temporal">Temporal</span><p>How motion evolves over the observation window — acceleration, deceleration, stops, frame-indexed transitions.</p></div>
+          <div class="r-card"><span class="r-tag math">Mathematical</span><p>Quantitative cues: pedestrian–vehicle distance, displacement, velocity estimates, and trajectory angles.</p></div>
+          <div class="r-card"><span class="r-tag ego">Ego-vehicle</span><p>Braking, decelerating, or yielding behavior of the ego-vehicle that enables or discourages crossing.</p></div>
+          <div class="r-card"><span class="r-tag scene">Scene-context</span><p>Traffic lights, crosswalks, road infrastructure, illumination, and interactions with surrounding agents.</p></div>
+          <div class="r-card"><span class="r-tag dest">Destination</span><p>Predicted endpoint within the scene — opposite curb, mid-road stop, or continuing along the same side.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Method / Pipeline -->
+    <section id="method" class="section section-dark">
+      <div class="container">
+        <p class="eyebrow light">Generation Pipeline</p>
+        <h2 class="section-title light">Grounded metadata + VLM motion captions + LLM rationale synthesis.</h2>
+        <p class="lead lead-light">
+          The pipeline aggregates human-annotated ground truth across constituent datasets into a unified metadata schema, enriches each sequence with fine-grained pedestrian motion captions from a VLM, and feeds a structured instruction package — including a compliance checklist and in-context exemplars — to <code>claude-sonnet-4</code> for question–answer–rationale generation.
+        </p>
+
+        <figure class="figure-block dark">
+          <img src="assets/data_generation_pipeline.png" alt="The PedestrianQA data generation pipeline mapping source annotations and VLM motion captions through metadata and an LLM prompt into the final QA dataset.">
+          <figcaption>
+            <strong>Figure 3.</strong> Data generation pipeline. Annotations from target pedestrians, interacting agents, scene context, and ego-vehicle telemetry are unified, augmented with VLM motion captions, and turned into Q–A–rationale triplets by a single LLM call.
+          </figcaption>
+        </figure>
+
+        <div class="pipeline-steps">
+          <div class="step">
+            <div class="step-num">01</div>
+            <h3>Metadata Construction</h3>
+            <p>Aggregate target/interacting pedestrian boxes, vehicle trajectories, scene objects, and ego telemetry into a unified TSV schema.</p>
+          </div>
+          <div class="step">
+            <div class="step-num">02</div>
+            <h3>Motion Captioning</h3>
+            <p>Crop each frame around the target, overlay a red box, and prompt a VLM with 13 motion-specific questions for fine-grained captions.</p>
+          </div>
+          <div class="step">
+            <div class="step-num">03</div>
+            <h3>LLM QA Synthesis</h3>
+            <p>System prompt + task definitions + rationale instructions + in-context exemplars + compliance checklist + metadata → Q–A–rationales.</p>
+          </div>
+          <div class="step">
+            <div class="step-num">04</div>
+            <h3>Compliance Checking</h3>
+            <p>Rationales must integrate cues from all annotation sources without parroting raw attributes — non-compliant outputs are regenerated.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Baseline -->
+    <section class="section">
+      <div class="container narrow">
+        <p class="eyebrow">Baseline</p>
+        <h2 class="section-title">A 3B-param VLM, LoRA-finetuned on PedestrianQA.</h2>
+        <p class="lead">
+          We finetune <code>Qwen2.5-VL-3B-Instruct</code> on PedestrianQA using LoRA adapters (<code>rank=8</code>, <code>α=16</code>). Both PIP and PTP are formulated as Q–A pairs — no architectural changes required. The same model handles intention prediction, trajectory forecasting, and rationale generation, jointly trained across all four source datasets.
+        </p>
+
+        <div class="setup-grid">
+          <div class="setup-item"><span>Model</span><strong>Qwen2.5-VL-3B-Instruct</strong></div>
+          <div class="setup-item"><span>Adapter</span><strong>LoRA · r=8 · α=16</strong></div>
+          <div class="setup-item"><span>Frames</span><strong>15 @ 30fps / 10 @ 10fps</strong></div>
+          <div class="setup-item"><span>Epochs</span><strong>3</strong></div>
+          <div class="setup-item"><span>Hardware</span><strong>2× RTX-A6000</strong></div>
+          <div class="setup-item"><span>Evaluator</span><strong>Claude-Sonnet-4 (CLAIR)</strong></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Results -->
+    <section id="results" class="section section-tint">
+      <div class="container">
+        <p class="eyebrow center">Results</p>
+        <h2 class="section-title center">Compact, finetuned, and ahead on every front.</h2>
+        <p class="lead center">
+          Finetuned <code>Ours&nbsp;(All&nbsp;Datasets)</code> outperforms zero-shot baselines including the much larger Qwen2.5-VL-7B, InternVL3-8B, Kwai-Keye-8B, and LLaVA-NeXT-Video-7B — across PIP, PTP, and rationale quality.
+        </p>
+
+        <!-- Headline numbers -->
+        <div class="headline-results">
+          <div class="hr-card hr-green">
+            <span class="hr-label">PIP Accuracy</span>
+            <span class="hr-value">78.3<small>%</small></span>
+            <span class="hr-sub">Overall · best in class</span>
+          </div>
+          <div class="hr-card hr-red">
+            <span class="hr-label">PIP F<sub>1</sub></span>
+            <span class="hr-value">0.542</span>
+            <span class="hr-sub">+25.1% vs Qwen2.5-VL-7B</span>
+          </div>
+          <div class="hr-card hr-blue">
+            <span class="hr-label">PTP ADE</span>
+            <span class="hr-value">37<small>px</small></span>
+            <span class="hr-sub">Lowest overall displacement</span>
+          </div>
+          <div class="hr-card hr-amber">
+            <span class="hr-label">Rationale</span>
+            <span class="hr-value">6/7</span>
+            <span class="hr-sub">Best categories on combined set</span>
+          </div>
+        </div>
+
+        <!-- PIP Table -->
+        <div class="result-block">
+          <div class="result-head">
+            <h3>Pedestrian Intention Prediction</h3>
+            <p>Binary crossing classification. Accuracy and F<sub>1</sub> across PIE, JAAD, TITAN, IDD-PeD, and combined.</p>
+          </div>
+          <figure class="table-figure">
+            <img src="assets/pip_results.png" alt="Table III: PIP results comparing baselines and our finetuned models across four datasets.">
+          </figure>
+        </div>
+
+        <!-- PTP Table -->
+        <div class="result-block">
+          <div class="result-head">
+            <h3>Pedestrian Trajectory Prediction</h3>
+            <p>ADE and FDE in image-coordinate pixels. Lower is better.</p>
+          </div>
+          <figure class="table-figure">
+            <img src="assets/ptp_results.png" alt="Table IV: PTP results showing ADE and FDE across datasets.">
+          </figure>
+        </div>
+
+        <!-- Rationale Table -->
+        <div class="result-block">
+          <div class="result-head">
+            <h3>Rationale Quality (CLAIR / Claude-Sonnet-4)</h3>
+            <p>SR · TR · MR · EVR · SCR · FDP · C. Scores in [0–100]; higher is better.</p>
+          </div>
+          <figure class="table-figure">
+            <img src="assets/rationale_results.png" alt="Table V: rationale evaluation across seven categories on the combined dataset.">
+          </figure>
+        </div>
+
+        <!-- Takeaways -->
+        <div class="takeaways">
+          <div class="tk">
+            <div class="tk-num">+54.4%</div>
+            <p>overall PIP accuracy vs. base Qwen2.5-VL-3B-Instruct (zero-shot).</p>
+          </div>
+          <div class="tk">
+            <div class="tk-num">+23.4%</div>
+            <p>ego-vehicle reasoning quality vs. Qwen2.5-VL-7B-Instruct.</p>
+          </div>
+          <div class="tk">
+            <div class="tk-num">IDD-PeD ↗</div>
+            <p>Finetuning on unstructured-only data nearly matches all-dataset training.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Access -->
+    <section class="section">
+      <div class="container">
+        <p class="eyebrow">Access</p>
+        <h2 class="section-title">Get the dataset, code, and models.</h2>
+        <p class="lead">
+          The PedestrianQA repository ships CSV indexes and Q–A annotations. Raw source videos are not redistributed — acquire all required licenses from the original source datasets before downloading them.
+        </p>
+
+        <div class="access-grid">
+          <a class="access-card primary" href="https://github.com/botmahn/PedestrianQA">
+            <div class="ac-top"><span>Repository</span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"/></svg></div>
+            <h3>botmahn/PedestrianQA</h3>
+            <p>Dataset, annotations, evaluation, and finetuning code.</p>
+          </a>
+          <a class="access-card" href="assets/pedestrianqa_camera_ready.pdf">
+            <div class="ac-top"><span>Camera-ready</span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"/></svg></div>
+            <h3>Paper · PDF</h3>
+            <p>The ICRA 2026 camera-ready version of PedestrianQA.</p>
+          </a>
+          <a class="access-card" href="https://huggingface.co/collections/namansmishaps/pedestrianqa">
+            <div class="ac-top"><span>Hugging Face</span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"/></svg></div>
+            <h3>Finetuned Models</h3>
+            <p>LoRA-adapted Qwen2.5-VL-3B checkpoints per dataset and combined.</p>
+          </a>
+        </div>
+
+        <div class="datasets">
+          <p class="ds-title">Source datasets</p>
+          <div class="ds-grid">
+            <a href="https://data.nvision2.eecs.yorku.ca/PIE_dataset/" class="ds">PIE</a>
+            <a href="https://data.nvision2.eecs.yorku.ca/JAAD_dataset/" class="ds">JAAD</a>
+            <a href="https://usa.honda-ri.com/titan" class="ds">TITAN</a>
+            <a href="https://cvit.iiit.ac.in/research/projects/cvit-projects/iddped" class="ds">IDD-PeD</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BibTeX -->
+    <section id="bibtex" class="section section-code">
+      <div class="container narrow">
+        <p class="eyebrow light">Citation</p>
+        <h2 class="section-title light">Cite PedestrianQA</h2>
+        <p class="lead lead-light">If you use PedestrianQA in your research, please cite our paper.</p>
+        <div class="code-wrap">
+          <button class="copy-btn" onclick="copyBibtex(this)">Copy</button>
+          <pre><code id="bibtex">@inproceedings{mishra2026pedestrianqa,
+  title     = {PedestrianQA: A Benchmark for Vision-Language Models
+               on Pedestrian Intention and Trajectory Prediction},
+  author    = {Mishra, Naman and Gangisetty, Shankar and Jawahar, C. V.},
+  booktitle = {Proceedings of the IEEE International Conference on
+               Robotics and Automation (ICRA)},
+  year      = {2026},
+  url       = {https://github.com/botmahn/PedestrianQA}
+}</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- Acknowledgment -->
+    <section class="section ack">
+      <div class="container narrow">
+        <p class="eyebrow">Acknowledgment</p>
+        <p class="lead">
+          This project was supported by <strong>iHub-Data</strong> and <strong>Mobility at IIIT Hyderabad</strong>.
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-row">
+        <div>
+          <strong>PedestrianQA</strong> · ICRA 2026<br>
+          <span>CVIT, IIIT Hyderabad</span>
+        </div>
+        <div class="footer-links">
+          <a href="assets/pedestrianqa_camera_ready.pdf">Paper</a>
+          <a href="https://github.com/botmahn/PedestrianQA">Code</a>
+          <a href="https://huggingface.co/collections/namansmishaps/pedestrianqa">Models</a>
+          <a href="#bibtex">BibTeX</a>
+        </div>
+      </div>
+      <p class="footer-fine">
+        Page template inspired by academic project pages. Source available with the project repository.
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    function copyBibtex(btn) {
+      const text = document.getElementById('bibtex').innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        const original = btn.innerText;
+        btn.innerText = 'Copied!';
+        btn.classList.add('copied');
+        setTimeout(() => { btn.innerText = original; btn.classList.remove('copied'); }, 1500);
+      });
+    }
+
+    // Reveal-on-scroll
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.section, .hero-figure, .feature, .stat-card, .r-card, .step, .hr-card, .access-card, .tk').forEach(el => {
+      el.classList.add('reveal'); io.observe(el);
+    });
+  </script>
+</body>
+</html>
